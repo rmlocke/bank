@@ -21,7 +21,7 @@ class CreateAccountsTable extends Migration
             $table->string('cvv');
             $table->string('address');
             $table->string('postcode');
-            $table->string('phone')
+            $table->string('phone');
             $table->timestamps();
         });
     }
