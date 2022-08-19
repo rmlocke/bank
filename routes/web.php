@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->guest(route('login'));
 });
+
+Route::get('/users', function (Request $request) {
+    $users = User::all();
+    return $users;
+});//->middleware('auth');
 
 Auth::routes([
     'register' => false
