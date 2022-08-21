@@ -15,7 +15,7 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return redirect()->guest(route('login'));
+    return view('welcome');
 });
 
 Route::get('/users', function (Request $request) {
@@ -26,5 +26,3 @@ Route::get('/users', function (Request $request) {
 Auth::routes([
     'register' => false
 ]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

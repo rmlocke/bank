@@ -15,7 +15,7 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->bigInteger('user_id') ->foreign('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('account_number');
             $table->string('cvv');

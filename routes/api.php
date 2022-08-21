@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', function (Request $request) {
-    $users = User::paginate(10);
+    $users = User::all();
     return $users;
 });

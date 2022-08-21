@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
+
+    /**
+     * Users for account
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
