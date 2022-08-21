@@ -6,7 +6,7 @@ const AccountList = () => {
     const [state, setData] = useState({users: ''});
     
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/users")
+        fetch("/users")
           .then((response) => {
             if (!response.ok) {
               throw new Error(
