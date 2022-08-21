@@ -3,24 +3,29 @@ import ReactDOM from 'react-dom';
 
 const AccountList = () => {
 
-    const [state, setData] = useState({users: ''});
-    
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         fetch("/users")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error(
-                `This is an HTTP error: The status is ${response.status}`
-              );
-            }
-            return response.json();
-          })
-          .then((data) => console.log(data))
-          .catch((err) => {
-            console.log(err.message);
-          });
+        .then((response) => response.json())
+        .then(setData)
+        .catch(setError);
     }, []);
 
+    if (loading) {
+      //
+    }
+
+    if (error) {
+      return <pre>{JSON.stringify(error)}</pre>
+    }
+
+    if (!data) {
+      return null;
+    }
+    
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -38,12 +43,12 @@ const AccountList = () => {
                               </thead>
                               <tbody>
                               {   
-                                state?.users?.data ? 
-                                    state?.users?.data?.map((user) => (
-                                            <tr key={user?.id}>
-                                                <td>{user?.id}</td>
-                                                <td>{user?.name}</td>
-                                                <td>{user?.email}</td>
+                                data ? 
+                                    data.map((user) => (
+                                            <tr key={user.id}>
+                                                <td>{user.id}</td>
+                                                <td>{user.name}</td>
+                                                <td>{user.email}</td>
                                             </tr>
                                     )) : null
                               }

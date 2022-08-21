@@ -5395,28 +5395,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var AccountList = function AccountList() {
-  var _state$users, _state$users2, _state$users2$data;
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    users: ''
-  }),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
+      data = _useState2[0],
       setData = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      error = _useState4[0],
+      setError = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      loading = _useState6[0],
+      setLoading = _useState6[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     fetch("/users").then(function (response) {
-      if (!response.ok) {
-        throw new Error("This is an HTTP error: The status is ".concat(response.status));
-      }
-
       return response.json();
-    }).then(function (data) {
-      return console.log(data);
-    })["catch"](function (err) {
-      console.log(err.message);
-    });
+    }).then(setData)["catch"](setError);
   }, []);
+
+  if (loading) {//
+  }
+
+  if (error) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("pre", {
+      children: JSON.stringify(error)
+    });
+  }
+
+  if (!data) {
+    return null;
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "container",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -5442,16 +5454,16 @@ var AccountList = function AccountList() {
                   })]
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
-                children: state !== null && state !== void 0 && (_state$users = state.users) !== null && _state$users !== void 0 && _state$users.data ? state === null || state === void 0 ? void 0 : (_state$users2 = state.users) === null || _state$users2 === void 0 ? void 0 : (_state$users2$data = _state$users2.data) === null || _state$users2$data === void 0 ? void 0 : _state$users2$data.map(function (user) {
+                children: data ? data.map(function (user) {
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                      children: user === null || user === void 0 ? void 0 : user.id
+                      children: user.id
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                      children: user === null || user === void 0 ? void 0 : user.name
+                      children: user.name
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                      children: user === null || user === void 0 ? void 0 : user.email
+                      children: user.email
                     })]
-                  }, user === null || user === void 0 ? void 0 : user.id);
+                  }, user.id);
                 }) : null
               })]
             })
