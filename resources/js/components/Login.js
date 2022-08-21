@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import InputField from './Input';
 
 function Login() {
+
+    const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        fetch('/login', {
+            method: POST,
+            body: JSON.stringify({
+                email: email,
+                password: password
+            }
+        }).then(response => {
+            console.log(response)
+        });
+
     };
 
     return (

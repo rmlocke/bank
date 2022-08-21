@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,6 @@ Route::get('/', function () {
 Route::get('/users', function (Request $request) {
     $users = User::all();
     return $users;
-});//->middleware('auth');
+})->middleware('auth:sanctum');
 
-Auth::routes([
-    'register' => false
-]);
+Route::post('login', [LoginController::class, 'authenticate'])->name('login');
