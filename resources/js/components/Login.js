@@ -10,12 +10,15 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        fetch('/login', {
-            method: POST,
-            body: JSON.stringify({
-                email: email,
-                password: password
-            }
+        let _data = {
+            email: email,
+            password: password
+          }
+          
+        fetch('/login, {
+            method: "POST",
+            body: JSON.stringify(_data),
+            headers: {"Content-type": "application/json; charset=UTF-8"}
         }).then(response => {
             console.log(response)
         });
